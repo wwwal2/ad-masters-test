@@ -1,7 +1,6 @@
 import { connect } from "react-redux";
 import Link from 'next/link';
-import { remove } from './redux/actions';
-
+import { add, remove } from './redux/actions';
 
 class Page2 extends React.Component {
     render() {
@@ -18,18 +17,30 @@ class Page2 extends React.Component {
                         <p>
                             {item.description}
                         </p>
-                        <button onClick={() => this.props.dispatchId(item.id)}>
+                        <p>
+                           Count: {item.count} Summ: {item.totalPrice}
+                        </p>
+                        <button onClick={() => this.props.addBtn(item.id)}>
+                            Add
+                        </button>
+                        <button onClick={() => this.props.removeBtn(item.id)}>
                             Remove
                         </button>
                     </div>
                 ))}
+                <p>
+                    Total price of all {this.props.totalOfAll}
+                </p>
             </div>
         )
     }
 }
 
-const mapStateToProps = (state) => ({ readTheStore: state.cartProducts });
-const mapDispatchToProps = (dispatch) => ({dispatchId: (removeItem) => dispatch(remove(removeItem))});
+const mapStateToProps = (state) => ({ readTheStore: state.cartProducts, totalOfAll: state.totalOfAll });
+const mapDispatchToProps = (dispatch) => ({
+    removeBtn: (removeItem) => dispatch(remove(removeItem)), 
+    addBtn: (addItem) => dispatch(add(addItem))
+});
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Page2);

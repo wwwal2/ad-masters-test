@@ -18,7 +18,10 @@ class Page1 extends React.Component {
                         <p>
                             {product.description}
                         </p>
-                        <button onClick={() => this.props.dispatchProduct(product)}>
+                        <p>
+                            Price: {product.price}
+                        </p>
+                        <button onClick={() => this.props.dispatchId(product.id)}>
                             Add to cart
                         </button>
                     </div>
@@ -28,8 +31,7 @@ class Page1 extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => ({readTheStore: state.cartProducts})
-const mapDispatchToProps = (dispatch) => ({dispatchProduct: (newProduct) => dispatch(add(newProduct))})
+const mapDispatchToProps = (dispatch) => ({dispatchId: (idProduct) => dispatch(add(idProduct))})
   
-export default connect(mapStateToProps, mapDispatchToProps)(Page1);
+export default connect(null, mapDispatchToProps)(Page1);
   
